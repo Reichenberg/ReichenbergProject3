@@ -1,0 +1,89 @@
+﻿@model ReichenbergProject3.Models.Item
+@{
+    ViewBag.Title = "Monthly Spending";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="container">
+  <div class="row">
+        
+            <div class="col-md-3">
+                <label for="Item" class="control-label">Select an Item: </label>
+                <select id="Item" name="name" class="form-control">
+                    @* javascript foreach to add an option for each item  *@
+                </select>
+                <div class="itemOptions">
+                    <a id="Create" class="btn btn-success">Create</a>
+                    <a id="Delete" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label for="Month" class="control-label">Select a Month: </label>
+                <select id="Month" name="month" class="form-control">
+                    @* javascript foreach to add an option for each item  *@
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label for="Action" class="control-label">Select an Acttion: </label>
+                <select id="Action" name="action" class="form-control">
+                    @* javascript foreach to add an option for each item  *@
+                </select>
+            </div>
+            
+            @* trade for inline form control with monetary appended *@
+
+            <div class="col-md-2">
+                <label for="Amount" class="control-label">Amount: </label>
+                <input id="Amount" name="amount" type="text" class="form-control" />
+            </div>
+
+            <div class="col-md-1">
+                <a id="Update" class="btn btn-primary" >Update</a>
+            </div>
+    </div>
+            
+    <div class="row itemName">
+            <h1>ITEM NAME HERE</h1>
+    </div>
+    <div class="row margin-top">
+        <div class="col-md-1 col-xs-12">
+            <p>January</p>
+        </div>
+        <div class="col-md-1 col-xs-12">
+            <p>February</p>
+        </div>
+        <div class="col-md-1 col-xs-12">
+            <p>March</p>
+        </div>
+        <div class="col-md-1 col-xs-12">
+            <p>April</p>
+        </div>
+        <div class="col-md-1 col-xs-12">
+            <p>May</p>
+        </div>
+        <div class="col-md-1 col-xs-12">
+            <p>June</p>
+        </div>
+        <div class="col-md-1 col-xs-12">
+            <p>July</p>
+        </div>
+        <div class="col-md-1 col-xs-12">
+            <p>August</p>
+        </div>
+        <div class="col-md-1 col-xs-12">
+            <p>September</p>
+        </div>
+        <div class="col-md-1 col-xs-12">
+            <p>October</p>
+        </div>
+        <div class="col-md-1 col-xs-12">
+            <p>November</p>
+        </div>
+        <div class="col-md-1 col-xs-12">
+            <p>December</p>
+        </div>
+    </div>
+</div>

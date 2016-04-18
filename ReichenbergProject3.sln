@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReichenbergProject3", "ReichenbergProject3\ReichenbergProject3.csproj", "{23534AF9-D431-480F-B082-D2FC7032E7EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{CE7B157D-41D6-4420-A3F9-7BB6EF99FE68}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{DD3B07BA-37D3-4B5F-9121-D997D81F0C33}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Scripts\Deploy-AzureResourceGroup.ps1 = PublishScripts\Scripts\Deploy-AzureResourceGroup.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{B1BDCA52-3CE7-4F26-9615-4C855F83FE71}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Templates\ReichenbergProject3.json = PublishScripts\Templates\ReichenbergProject3.json
+		PublishScripts\Templates\ReichenbergProject3.param.dev.json = PublishScripts\Templates\ReichenbergProject3.param.dev.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{23534AF9-D431-480F-B082-D2FC7032E7EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23534AF9-D431-480F-B082-D2FC7032E7EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23534AF9-D431-480F-B082-D2FC7032E7EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23534AF9-D431-480F-B082-D2FC7032E7EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DD3B07BA-37D3-4B5F-9121-D997D81F0C33} = {CE7B157D-41D6-4420-A3F9-7BB6EF99FE68}
+		{B1BDCA52-3CE7-4F26-9615-4C855F83FE71} = {CE7B157D-41D6-4420-A3F9-7BB6EF99FE68}
+	EndGlobalSection
+EndGlobal

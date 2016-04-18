@@ -1,0 +1,32 @@
+{
+  "siteName": {
+    "value": "ReichenbergProject3"
+  },
+  "hostingPlanName": {
+    "value": "ReichenbergCServicePlan"
+  },
+  "siteLocation": {
+    "value": "East US"
+  },
+  "sku": {
+    "value": "Free"
+  },
+  "workerSize": {
+    "value": "0"
+  },
+  "serverName": {
+    "value": "reichenberg3110server"
+  },
+  "serverLocation": {
+    "value": "North Europe"
+  },
+  "administratorLogin": {
+    "value": "csciuser"
+  },
+  "administratorLoginPassword": {
+    "value": "Pass213!"
+  },
+  "databaseName": {
+    "value": "ReichenbergProject3_db"
+  }
+}
