@@ -1,4 +1,4 @@
-﻿@model ReichenbergProject3.Models.Item
+﻿@model IEnumerable<ReichenbergProject3.Models.Item>
 @{
     ViewBag.Title = "Monthly Spending";
 }
@@ -87,3 +87,8 @@
         </div>
     </div>
 </div>
+
+<script>
+    var items = @Json.Encode(Model);
+    console.log(items);
+</script>
