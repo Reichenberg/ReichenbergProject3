@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ReichenbergProject3.Models.Item>
+﻿
 @{
     ViewBag.Title = "Monthly Spending";
 }
@@ -10,30 +10,27 @@
         
             <div class="col-md-3">
                 <label for="Item" class="control-label">Select an Item: </label>
-                <select id="Item" name="name" class="form-control">
-                    @* javascript foreach to add an option for each item  *@
+                <select id="Item" name="name" class="form-control" data-bind="options: Items, value: SelectedItem, optionsText: 'Name'">
                 </select>
                 <div class="itemOptions">
-                    <a id="Create" class="btn btn-success">Create</a>
-                    <a id="Delete" class="btn btn-danger">Delete</a>
+                    <a id="Create" class="btn btn-success" data-toggle="modal" data-target="#myModal">Create</a>
+                    <a id="Delete" class="btn btn-danger" data-bind="click: DeleteItem">Delete</a>
                 </div>
             </div>
 
             <div class="col-md-3">
                 <label for="Month" class="control-label">Select a Month: </label>
-                <select id="Month" name="month" class="form-control">
-                    @* javascript foreach to add an option for each item  *@
+                <select id="Month" name="month" class="form-control" data-bind="options: Months, value: SelectedMonth">
                 </select>
             </div>
 
             <div class="col-md-3">
-                <label for="Action" class="control-label">Select an Acttion: </label>
-                <select id="Action" name="action" class="form-control">
-                    @* javascript foreach to add an option for each item  *@
+                <label for="Action" class="control-label">Select an Action: </label>
+                <select id="Action" name="action" class="form-control" data-bind="options: Actions, value: SelectedAction">
+                  
                 </select>
             </div>
             
-            @* trade for inline form control with monetary appended *@
 
             <div class="col-md-2">
                 <label for="Amount" class="control-label">Amount: </label>
@@ -46,7 +43,7 @@
     </div>
             
     <div class="row itemName">
-            <h1>ITEM NAME HERE</h1>
+            <h1 data-bind="text: SelectedItem().Name"></h1>
     </div>
     <div class="row margin-top">
         <div class="col-md-1 col-xs-12">
@@ -88,7 +85,32 @@
     </div>
 </div>
 
-<script>
-    var items = @Json.Encode(Model);
-    console.log(items);
-</script>
+@* Modal for creating a new item *@
+<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Create New Item</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form=group">
+                    <label class="form-control">Item Name: </label> <input type="text" class="form-control" data-bind="value: NewItemName" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bind="click: CreateItem">Create Item</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+@section Scripts {
+        @Scripts.Render("~/bundles/knockout")
+        @Scripts.Render("~/bundles/MonthlySpending")
+
+
+
+
+    }

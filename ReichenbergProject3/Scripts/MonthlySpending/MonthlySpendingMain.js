@@ -1,19 +1,22 @@
 ﻿$(function () {
-    var viewModel = MonthlySpendingViewModel();
-    ko.applyBindings(viewModel);
+    var viewModel = new MonthlySpendingViewModel();
+    
 
     //Get user's items on page load
     $.ajax({
-        type: "GET",
-        url: "/home/UpdateItemData",
+        type: "POST",
+        url: "Home/UpdateItemData",
         success: function (data) {
-            viewModel.Items = ko.observableArray();
-            for (item in data) {
-                viewModel.Items.push(new Item(data[item]));
+            if (data.length > 0) {
+                var mappedItems = $.map(data, function (item) { return new Item(item); });
+                viewModel.Items(mappedItems);
+                ko.applyBindings(viewModel);
             }
         },
         error: function (data) {
             alert("Error getting items.");
+
         }
     });
+    
 });

@@ -39,6 +39,5 @@ namespace ReichenbergProject3.Models
         [Range(0, Double.MaxValue)]
         public double December { get; set; }
 
-        public virtual ICollection<ApplicationUser> Person { get; set; }
     }
 }

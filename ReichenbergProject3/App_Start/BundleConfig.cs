@@ -23,6 +23,16 @@ namespace ReichenbergProject3
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
+                      "~/Scripts/knockout-3.4.0.js",
+                        "~/Scripts/knockout-3.4.0.debug.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/MonthlySpending").Include(
+          "~/Scripts/MonthlySpending/Item.js",
+          "~/Scripts/MonthlySpending/MonthlySpendingMain.js",
+          "~/Scripts/MonthlySpending/MonthlySpendingViewModel.js"));
+
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));

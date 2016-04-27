@@ -25,8 +25,34 @@ namespace ReichenbergProject3.DataContexts.IdentityMigrations
                         October = c.Double(nullable: false),
                         November = c.Double(nullable: false),
                         December = c.Double(nullable: false),
+                        ApplicationUser_Id = c.String(maxLength: 128),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUser_Id)
+                .Index(t => t.ApplicationUser_Id);
+            
+            CreateTable(
+                "dbo.AspNetRoles",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(nullable: false, maxLength: 256),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+            
+            CreateTable(
+                "dbo.AspNetUserRoles",
+                c => new
+                    {
+                        RoleId = c.String(nullable: false, maxLength: 128),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.RoleId, t.UserId })
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.RoleId)
+                .Index(t => t.UserId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -73,66 +99,27 @@ namespace ReichenbergProject3.DataContexts.IdentityMigrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
-            CreateTable(
-                "dbo.AspNetUserRoles",
-                c => new
-                    {
-                        RoleId = c.String(nullable: false, maxLength: 128),
-                        UserId = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => new { t.RoleId, t.UserId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
-                .Index(t => t.RoleId)
-                .Index(t => t.UserId);
-            
-            CreateTable(
-                "dbo.AspNetRoles",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(nullable: false, maxLength: 256),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
-            
-            CreateTable(
-                "dbo.ApplicationUserItems",
-                c => new
-                    {
-                        ApplicationUser_Id = c.String(nullable: false, maxLength: 128),
-                        Item_Id = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.ApplicationUser_Id, t.Item_Id })
-                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUser_Id, cascadeDelete: true)
-                .ForeignKey("dbo.Items", t => t.Item_Id, cascadeDelete: true)
-                .Index(t => t.ApplicationUser_Id)
-                .Index(t => t.Item_Id);
-            
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.ApplicationUserItems", "Item_Id", "dbo.Items");
-            DropForeignKey("dbo.ApplicationUserItems", "ApplicationUser_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Items", "ApplicationUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropIndex("dbo.ApplicationUserItems", new[] { "Item_Id" });
-            DropIndex("dbo.ApplicationUserItems", new[] { "ApplicationUser_Id" });
-            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
+            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropTable("dbo.ApplicationUserItems");
-            DropTable("dbo.AspNetRoles");
-            DropTable("dbo.AspNetUserRoles");
+            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
+            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Items", new[] { "ApplicationUser_Id" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
+            DropTable("dbo.AspNetUserRoles");
+            DropTable("dbo.AspNetRoles");
             DropTable("dbo.Items");
         }
     }
