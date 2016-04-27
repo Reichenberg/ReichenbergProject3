@@ -26,7 +26,7 @@
 
             <div class="col-md-3">
                 <label for="Action" class="control-label">Select an Action: </label>
-                <select id="Action" name="action" class="form-control" data-bind="options: Actions, value: SelectedAction">
+                <select id="Action" name="action" class="form-control" data-bind="options: Actions, value: SelectedAction, optionsCaption: 'None'">
                   
                 </select>
             </div>
@@ -34,11 +34,11 @@
 
             <div class="col-md-2">
                 <label for="Amount" class="control-label">Amount: </label>
-                <input id="Amount" name="amount" type="text" class="form-control" />
+                <input id="Amount" name="amount" type="number" class="form-control" min="0" data-bind="value: amount" />
             </div>
 
             <div class="col-md-1">
-                <a id="Update" class="btn btn-primary" >Update</a>
+                <input id="Update" type="submit" value="update" class="btn btn-primary" data-bind="click: UpdateItem"./>
             </div>
     </div>
             
@@ -95,7 +95,7 @@
             </div>
             <div class="modal-body">
                 <div class="form=group">
-                    <label class="form-control">Item Name: </label> <input type="text" class="form-control" data-bind="value: NewItemName" />
+                    <label class="control-label">Item Name: </label> <input type="text" class="form-control" data-bind="value: NewItemName" />
                 </div>
             </div>
             <div class="modal-footer">

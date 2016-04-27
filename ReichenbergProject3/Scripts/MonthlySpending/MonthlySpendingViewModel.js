@@ -6,8 +6,9 @@
 
     self.Months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     self.SelectedMonth = ko.observable();
-    self.Actions = ["None", "Increase", "Decrease", "Reset"];
+    self.Actions = ["Increase", "Decrease", "Reset"];
     self.SelectedAction = ko.observable();
+    self.amount = ko.observable(0);
 
     //Holds Item to be created
     self.NewItemName = ko.observable();
@@ -32,7 +33,9 @@
         $.ajax({
             type: "GET",
             url: "home/delete",
-            data: { Id: self.SelectedItem().Id },
+            data: {
+                Id: self.SelectedItem().Id
+            },
             success: function (data) {
                 alert(data.Message);
                 self.UpdateItems();
@@ -45,9 +48,14 @@
 
     self.UpdateItem = function () {
         $.ajax({
-            type: "GET",
-            url: "home/delete",
-            data: { Id: self.SelectedItem().Id },
+            type: "POST",
+            url: "home/Update",
+            data: {
+                Id: self.SelectedItem().Id(),
+                month: self.SelectedMonth(),
+                action: self.SelectedAction(),
+                amount: self.amount()
+            },
             success: function (data) {
                 alert(data.Message);
                 self.UpdateItems();

@@ -12,6 +12,11 @@
                 viewModel.Items(mappedItems);
                 ko.applyBindings(viewModel);
             }
+            else {
+                //push empty item to allow page to load with initial data
+                viewModel.Items.push(new Item());
+                ko.applyBindings(viewModel);
+            }
         },
         error: function (data) {
             alert("Error getting items.");

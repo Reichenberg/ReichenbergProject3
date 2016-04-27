@@ -155,6 +155,7 @@ namespace ReichenbergProject3.Controllers
         /// </summary>
         /// <param name="item">Item to add to the user</param>
         /// <returns>JsonResult detailing success or failure of Creating new Item</returns>
+        [HttpPost]
         public JsonResult Update(int id, string month, string action,double amount)
         {
             try
@@ -166,7 +167,7 @@ namespace ReichenbergProject3.Controllers
                 {
                     throw new ArgumentNullException("Month and Action Cannot be empty");
                 }
-                else if(amount <= 0)
+                else if(amount < 0)
                 {
                     throw new ArgumentOutOfRangeException("Amount must be greater than 0");
                 }
@@ -175,11 +176,14 @@ namespace ReichenbergProject3.Controllers
                 switch (action)
                 {
                     case "Increase":
-                        break;
+                        Increase(month, amount, id);
+                        return Json(success);
                     case "Decrease":
-                        break;
-                    case "Reset:":
-                        break;
+                        Decrease(month, amount, id);
+                        return Json(success);
+                    case "Reset":
+                        Reset(id);
+                        return Json(success);
                 }
                 return Json(success, JsonRequestBehavior.AllowGet);
             }
@@ -199,10 +203,16 @@ namespace ReichenbergProject3.Controllers
             }
         }
 
+        /// <summary>
+        /// Method to handle increasing an amount of the item
+        /// </summary>
+        /// <param name="month">month to increase</param>
+        /// <param name="amount">amoutn to increase by</param>
+        /// <param name="id">item to alter</param>
         public void Increase(string month, double amount, int id)
         {
             var user = GetUser();
-            var item = user.Items.Where(i => i.Id == id).FirstOrDefault();
+            var item = _db.Items.Where(i => i.Id == id).FirstOrDefault();
             switch (month)
             {
                 case "January":
@@ -243,6 +253,90 @@ namespace ReichenbergProject3.Controllers
                     break;
             }
 
+            _db.Entry(item).State = EntityState.Modified;
+            _db.SaveChanges();
+
+        }
+
+        /// <summary>
+        /// Method to handle decreasing an amount of the item
+        /// </summary>
+        /// <param name="month">month to decrease</param>
+        /// <param name="amount">amoutn to decrease by</param>
+        /// <param name="id">item to alter</param>
+        public void Decrease(string month, double amount, int id)
+        {
+            var user = GetUser();
+            var item = _db.Items.Where(i => i.Id == id).FirstOrDefault();
+            switch (month)
+            {
+                case "January":
+                    item.January -= amount;
+                    break;
+                case "February":
+                    item.February -= amount;
+                    break;
+                case "March":
+                    item.March -= amount;
+                    break;
+                case "April":
+                    item.April -= amount;
+                    break;
+                case "May":
+                    item.May -= amount;
+                    break;
+                case "June":
+                    item.June -= amount;
+                    break;
+                case "July":
+                    item.July -= amount;
+                    break;
+                case "August":
+                    item.August -= amount;
+                    break;
+                case "September":
+                    item.September -= amount;
+                    break;
+                case "October":
+                    item.October -= amount;
+                    break;
+                case "November":
+                    item.November -= amount;
+                    break;
+                case "December":
+                    item.December -= amount;
+                    break;
+            }
+
+            _db.Entry(item).State = EntityState.Modified;
+            _db.SaveChanges();
+
+        }
+
+        /// <summary>
+        /// Resets the month amounts for the item
+        /// </summary>
+        /// <param name="id">item to reset</param>
+        public void Reset(int id)
+        {
+            var user = GetUser();
+            var item = _db.Items.Where(i => i.Id == id).FirstOrDefault();
+
+            item.January = 0;
+            item.February = 0;
+            item.March = 0;
+            item.April = 0;
+            item.May = 0;
+            item.June = 0;
+            item.July = 0;
+            item.August = 0;
+            item.September = 0;
+            item.October = 0;
+            item.November = 0;
+            item.December = 0;
+
+            _db.Entry(item).State = EntityState.Modified;
+            _db.SaveChanges();
         }
 
         #endregion
