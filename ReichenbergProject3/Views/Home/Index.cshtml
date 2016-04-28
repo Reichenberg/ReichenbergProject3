@@ -42,11 +42,8 @@
             </div>
     </div>
             
-    <div class="row itemName">
-            <h1 data-bind="text: SelectedItem().Name"></h1>
-    </div>
-    <div class="row margin-top">
-        <div class="col-md-1 col-xs-12">
+    <div class="row margin-top" id="spendingData">
+        @*<div class="col-md-1 col-xs-12">
             <p>January</p>
         </div>
         <div class="col-md-1 col-xs-12">
@@ -81,7 +78,7 @@
         </div>
         <div class="col-md-1 col-xs-12">
             <p>December</p>
-        </div>
+        </div>*@
     </div>
 </div>
 
@@ -109,8 +106,5 @@
 @section Scripts {
         @Scripts.Render("~/bundles/knockout")
         @Scripts.Render("~/bundles/MonthlySpending")
-
-
-
-
-    }
+<script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        }
