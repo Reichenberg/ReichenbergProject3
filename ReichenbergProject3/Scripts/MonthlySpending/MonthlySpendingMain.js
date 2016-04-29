@@ -1,6 +1,6 @@
 ﻿$(function () {
     var viewModel = new MonthlySpendingViewModel();
-    
+    $('[data-toggle="tooltip"]').tooltip()
 
     //Get user's items on page load
     $.ajax({
@@ -16,7 +16,6 @@
             else {
                 //push empty item to allow page to load with initial data
                 viewModel.Items.push(new Item());
-                //viewModel.SelectedItem(new Item());
                 ko.applyBindings(viewModel);
             }
         },

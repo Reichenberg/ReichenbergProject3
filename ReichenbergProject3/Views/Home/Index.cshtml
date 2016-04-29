@@ -7,26 +7,25 @@
 
 <div class="container">
   <div class="row">
-        
             <div class="col-md-3">
                 <label for="Item" class="control-label">Select an Item: </label>
                 <select id="Item" name="name" class="form-control" data-bind="options: Items, value: SelectedItem, optionsText: 'Name'">
                 </select>
                 <div class="itemOptions">
                     <a id="Create" class="btn btn-success" data-toggle="modal" data-target="#myModal">Create</a>
-                    <a id="Delete" class="btn btn-danger" data-bind="click: DeleteItem">Delete</a>
+                    <a id="Delete" class="btn btn-danger" data-toggle="modal" data-target="#delete" data-bind="disable: DeleteDisabled">Delete</a>
                 </div>
             </div>
 
             <div class="col-md-3">
                 <label for="Month" class="control-label">Select a Month: </label>
-                <select id="Month" name="month" class="form-control" data-bind="options: Months, value: SelectedMonth">
+                <select id="Month" name="month" class="form-control" data-bind="options: Months, value: SelectedMonth, disable: SelectMonthDisabled">
                 </select>
             </div>
 
             <div class="col-md-3">
                 <label for="Action" class="control-label">Select an Action: </label>
-                <select id="Action" name="action" class="form-control" data-bind="options: Actions, value: SelectedAction, optionsCaption: 'None'">
+                <select id="Action" name="action" class="form-control" data-bind="options: Actions, value: SelectedAction, optionsCaption: 'None', disable: SelectActionDisabled">
                   
                 </select>
             </div>
@@ -34,51 +33,16 @@
 
             <div class="col-md-2">
                 <label for="Amount" class="control-label">Amount: </label>
-                <input id="Amount" name="amount" type="number" class="form-control" min="0" data-bind="value: amount" />
+                <input id="Amount" name="amount" type="text" class="form-control" min="0"  data-bind="value: amount, disable: AmountDisabled" />
             </div>
 
             <div class="col-md-1">
-                <input id="Update" type="submit" value="update" class="btn btn-primary" data-bind="click: UpdateItem"./>
+                <input id="Update" type="submit" value="update" class="btn btn-primary" data-bind="click: UpdateItem, disable: UpdateDisabled"/>
             </div>
     </div>
             
     <div class="row margin-top" id="spendingData">
-        @*<div class="col-md-1 col-xs-12">
-            <p>January</p>
-        </div>
-        <div class="col-md-1 col-xs-12">
-            <p>February</p>
-        </div>
-        <div class="col-md-1 col-xs-12">
-            <p>March</p>
-        </div>
-        <div class="col-md-1 col-xs-12">
-            <p>April</p>
-        </div>
-        <div class="col-md-1 col-xs-12">
-            <p>May</p>
-        </div>
-        <div class="col-md-1 col-xs-12">
-            <p>June</p>
-        </div>
-        <div class="col-md-1 col-xs-12">
-            <p>July</p>
-        </div>
-        <div class="col-md-1 col-xs-12">
-            <p>August</p>
-        </div>
-        <div class="col-md-1 col-xs-12">
-            <p>September</p>
-        </div>
-        <div class="col-md-1 col-xs-12">
-            <p>October</p>
-        </div>
-        <div class="col-md-1 col-xs-12">
-            <p>November</p>
-        </div>
-        <div class="col-md-1 col-xs-12">
-            <p>December</p>
-        </div>*@
+
     </div>
 </div>
 
@@ -97,7 +61,26 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-bind="click: CreateItem">Create Item</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click: CreateItem">Create Item</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+@* Modal for Deleting a new item *@
+<div class="modal fade" tabindex="-1" role="dialog" id="delete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" >Delete</h4>
+            </div>
+            <div class="modal-body">
+               <h1>Delete: <span data-bind="text: SelectedItem().Name"/>?</h1>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click: DeleteItem">Delete Item</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

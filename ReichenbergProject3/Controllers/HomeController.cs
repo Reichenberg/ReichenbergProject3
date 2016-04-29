@@ -11,6 +11,9 @@ using System.Web.Mvc;
 
 namespace ReichenbergProject3.Controllers
 {
+    /// <summary>
+    /// Handles all Monthly spending functionality
+    /// </summary>
     [Authorize]
     public class HomeController : Controller
     {
@@ -115,6 +118,11 @@ namespace ReichenbergProject3.Controllers
             return currentUser;
         }
 
+        /// <summary>
+        /// Delete Item from user's items
+        /// </summary>
+        /// <param name="Id">Item to delete</param>
+        /// <returns>Success or fail message</returns>
         public JsonResult Delete(int Id)
         {
             try

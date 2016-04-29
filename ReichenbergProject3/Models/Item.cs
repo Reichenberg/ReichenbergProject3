@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ReichenbergProject3.Models
 {
+    /// <summary>
+    /// Item class for user 
+    /// </summary>
     public class Item
     {
         [Key]
